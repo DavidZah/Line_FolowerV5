@@ -141,8 +141,8 @@ void set_pwm(){
 	if (oper_pwm_1 < MIN_SPEED){
 		oper_pwm_1 = 0;
 	}
-	if (oper_pwm_1 < MIN_SPEED){
-		oper_pwm_1 = 0;
+	if (oper_pwm_2 < MIN_SPEED){
+		oper_pwm_2 = 0;
 	}
 	pwm_1 = oper_pwm_1; 
 	pwm_2 = oper_pwm_2; 
@@ -154,27 +154,14 @@ ISR(TIMER0_COMPA_vect)
 	
 	if (counter == 0) {
 		PIN_PWM_1_set_level(true);
+		PIN_PWM_2_set_level(true);
+
 	}
 	if (counter == pwm_1){
 		PIN_PWM_1_set_level(false); 
 	}
-	if(counter == 500){
-		counter = 0; 
-	}
-	else{
-	counter++;
-	}
-}
-/*PWM 2*/
-ISR(TIMER2_COMPA_vect)
-{
-	static uint_fast16_t counter;
-	
-	if (counter == 0) {
-		PIN_PWM_1_set_level(true);
-	}
 	if (counter == pwm_2){
-		PIN_PWM_1_set_level(false); 
+		PIN_PWM_2_set_level(false); 
 	}
 	if(counter == 500){
 		counter = 0; 
@@ -183,7 +170,6 @@ ISR(TIMER2_COMPA_vect)
 	counter++;
 	}
 }
-
 ISR(TIMER1_COMPA_vect)
 {
 	adc_sync_read_sensor();
@@ -199,8 +185,7 @@ int main(void)
 	sense_calibration();
 	ENABLE_INTERRUPTS();
 		
-	OCR2A =0xaa;
-	OCR0A =0xaa; 
+	OCR0A =0xaa;
 	
 	OCR1A = 1000; // 1ms
 	

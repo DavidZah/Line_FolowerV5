@@ -72,18 +72,18 @@ int8_t TIMER_1_init()
 {
 
 	/* Enable TC2 */
-	PRR0 &= ~(1 << PRTIM2);
+	//PRR0 &= ~(1 << PRTIM2);
 
 	// TCCR2A = (0 << COM2A1) | (0 << COM2A0) /* Normal port operation, OCA disconnected */
 	//		 | (0 << COM2B1) | (0 << COM2B0) /* Normal port operation, OCB disconnected */
 	//		 | (0 << WGM21) | (0 << WGM20); /* TC8 Mode 0 Normal */
 
-	TCCR2B = 0                                          /* TC8 Mode 0 Normal */
-	         | (0 << CS22) | (1 << CS21) | (0 << CS20); /* IO clock divided by 8 */
+	//TCCR2B = 0                                          /* TC8 Mode 0 Normal */
+	  //       | (0 << CS22) | (1 << CS21) | (0 << CS20); /* IO clock divided by 8 */
 
-	TIMSK2 = 0 << OCIE2B   /* Output Compare B Match Interrupt Enable: disabled */
-	         | 1 << OCIE2A /* Output Compare A Match Interrupt Enable: enabled */
-	         | 0 << TOIE2; /* Overflow Interrupt Enable: enabled */
+	//TIMSK2 = 0 << OCIE2B   /* Output Compare B Match Interrupt Enable: disabled */
+	    //     | 1 << OCIE2A /* Output Compare A Match Interrupt Enable: enabled */
+	      //   | 0 << TOIE2; /* Overflow Interrupt Enable: enabled */
 
 	// GTCCR = 0 << TSM /* Timer/Counter Synchronization Mode: disabled */
 	//		 | 0 << PSRASY /* Prescaler Reset Timer/Counter2: disabled */
