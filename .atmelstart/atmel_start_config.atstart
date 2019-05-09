@@ -1,0 +1,345 @@
+format_version: '2'
+name: My Project
+versions:
+  api: '1.0'
+  backend: 1.5.122
+  commit: 820baecf7dd115d94b0d42ee3b0b9d6ba2da7113
+  content: 1.0.1498
+  content_pack_name: acme-packs-all
+  format: '2'
+  frontend: 1.5.1826
+board:
+  identifier: CustomBoard
+  device: ATmega2560-16AU
+details: null
+application: null
+middlewares: {}
+drivers:
+  CPU:
+    user_label: CPU
+    definition: 'Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::CPU::driver_config_definition::SYSCTRL::Drivers:SYSCTRL:'
+    functionality: System
+    api: 'Drivers:SYSCTRL:'
+    configuration:
+      async_input_speed: 32768
+      clkadc_oscillator: Input clock
+      clkasy_oscillator: Async input clock
+      clkcpu_oscillator: Input clock
+      clkio_oscillator: Input clock
+      clkptc_oscillator: Input clock
+      cpu_clock_source: CLKcpu
+      cpu_sreg_i: false
+      enable_async_input: true
+      enable_clkadc: true
+      enable_clkasy: true
+      enable_clkcpu: true
+      enable_clkio: true
+      enable_clkptc: true
+      enable_core_clock: true
+      enable_input: true
+      input_speed: 8000000
+      pm_ivsel: Interrupt vector placed at the beginning of main FLASH memory
+      pm_pud: false
+      pm_se: false
+      pm_sm: Idle
+      prescaler_divider: '1'
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: Core
+          input: Core
+          external: false
+          external_frequency: 0
+        configuration: {}
+  EXTERNAL_IRQ_0:
+    user_label: EXTERNAL_IRQ_0
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::EXINT::driver_config_definition::EXINT::Drivers:EXINT:Init
+    functionality: External_IRQ
+    api: Drivers:EXINT:Init
+    configuration:
+      exint_isc0: The low level of ISC0 generates an interrupt request
+      exint_isc1: The low level of ISC1 generates an interrupt request
+      exint_isc2: The low level of ISC2 generates an interrupt request
+      exint_isc3: The low level of ISC3 generates an interrupt request
+      exint_isc4: The low level of ISC4 generates an interrupt request
+      exint_isc5: The low level of ISC5 generates an interrupt request
+      exint_isc6: The low level of ISC6 generates an interrupt request
+      exint_isc7: The low level of ISC7 generates an interrupt request
+      inc_isr_harness: true
+    optional_signals:
+    - identifier: EXTERNAL_IRQ_0:PCINT/7
+      pad: PB7
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::EXINT.PCINT.7
+      name: EXINT/PCINT/7
+      label: PCINT/7
+    variant: null
+    clocks:
+      domain_group: null
+  ADC_0:
+    user_label: ADC_0
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::ADC::driver_config_definition::ADC.Basic::Drivers:ADC:Basic
+    functionality: ADC
+    api: Drivers:ADC:Basic
+    configuration:
+      adcsra_adate: true
+      adcsra_aden: true
+      adcsra_adie: true
+      adcsra_adps: '32'
+      adcsrb_acme: false
+      adcsrb_adts: Free Running mode
+      admux_adlar: false
+      admux_mux: ADC Single Ended Input pin 0
+      admux_refs: AVCC with external capacitor at AREF pin
+    optional_signals:
+    - identifier: ADC_0:ADC/8
+      pad: PK0
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::ADC.ADC.8
+      name: ADC/ADC/8
+      label: ADC/8
+    - identifier: ADC_0:ADC/9
+      pad: PK1
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::ADC.ADC.9
+      name: ADC/ADC/9
+      label: ADC/9
+    - identifier: ADC_0:ADC/10
+      pad: PK2
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::ADC.ADC.10
+      name: ADC/ADC/10
+      label: ADC/10
+    - identifier: ADC_0:ADC/11
+      pad: PK3
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::ADC.ADC.11
+      name: ADC/ADC/11
+      label: ADC/11
+    - identifier: ADC_0:ADC/12
+      pad: PK4
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::ADC.ADC.12
+      name: ADC/ADC/12
+      label: ADC/12
+    - identifier: ADC_0:ADC/13
+      pad: PK5
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::ADC.ADC.13
+      name: ADC/ADC/13
+      label: ADC/13
+    - identifier: ADC_0:ADC/14
+      pad: PK6
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::ADC.ADC.14
+      name: ADC/ADC/14
+      label: ADC/14
+    - identifier: ADC_0:ADC/15
+      pad: PK7
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::ADC.ADC.15
+      name: ADC/ADC/15
+      label: ADC/15
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: ADC
+          input: CLKadc
+          external: false
+          external_frequency: 0
+        configuration:
+          adc_clock_source: CLKadc
+  TIMER_2:
+    user_label: TIMER_2
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC0::driver_config_definition::TC8.Mode.0.Normal::Drivers:TC8:Init
+    functionality: Timer
+    api: Drivers:TC8:Init
+    configuration:
+      inc_isr_harness: true
+      tc8_coma: Normal port operation, OCA disconnected
+      tc8_comb: Normal port operation, OCB disconnected
+      tc8_cs: IO clock divided by 1024
+      tc8_ociea: true
+      tc8_ocieb: false
+      tc8_orca: 170
+      tc8_orcb: 0
+      tc8_psrasy: false
+      tc8_psrsync: false
+      tc8_toie: true
+      tc8_tsm: false
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: TC8
+          input: CLKio
+          external: false
+          external_frequency: 0
+        configuration:
+          tc8_clock_source: CLKio
+  TIMER_1:
+    user_label: TIMER_1
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC2::driver_config_definition::TC8.Mode.0.Normal::Drivers:TC8:Init
+    functionality: Timer
+    api: Drivers:TC8:Init
+    configuration:
+      inc_isr_harness: true
+      tc8_async_exclk: false
+      tc8_coma: Normal port operation, OCA disconnected
+      tc8_comb: Normal port operation, OCB disconnected
+      tc8_cs: IO clock divided by 1024
+      tc8_ociea: true
+      tc8_ocieb: false
+      tc8_orca: 170
+      tc8_orcb: 0
+      tc8_psrasy: false
+      tc8_psrsync: false
+      tc8_toie: true
+      tc8_tsm: false
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: TC2
+          input: CLKio
+          external: false
+          external_frequency: 0
+        configuration:
+          tc2_clock_source: CLKio
+  TIMER_0:
+    user_label: TIMER_0
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC1::driver_config_definition::TC16.Mode.12.CTC::Drivers:TC16:Init
+    functionality: Timer
+    api: Drivers:TC16:Init
+    configuration:
+      inc_isr_harness: true
+      tc16_coma: Normal port operation, OCA disconnected
+      tc16_comb: Normal port operation, OCB disconnected
+      tc16_cs: IO clock divided by 8
+      tc16_ices: Falling edge will trigger input capture
+      tc16_icie: false
+      tc16_icnc: false
+      tc16_icr: 255
+      tc16_ociea: true
+      tc16_ocieb: false
+      tc16_orca: 170
+      tc16_orcb: 0
+      tc16_psrasy: false
+      tc16_psrsync: false
+      tc16_toie: false
+      tc16_tsm: false
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: TC16
+          input: CLKio
+          external: false
+          external_frequency: 0
+        configuration:
+          tc16_clock_source: CLKio
+pads:
+  PIN_PWM_1:
+    name: PH4
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PH4
+    mode: Digital output
+    user_label: PIN_PWM_1
+    configuration: null
+  PIN_PWM_2:
+    name: PH5
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PH5
+    mode: Digital output
+    user_label: PIN_PWM_2
+    configuration:
+      pad_initial_level: Low
+  PB7:
+    name: PB7
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PB7
+    mode: Digital input
+    user_label: PB7
+    configuration: null
+  PIN_LED_3:
+    name: PA2
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PA2
+    mode: Digital output
+    user_label: PIN_LED_3
+    configuration:
+      pad_initial_level: High
+  PIN_LED_2:
+    name: PA1
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PA1
+    mode: Digital output
+    user_label: PIN_LED_2
+    configuration:
+      pad_initial_level: High
+  PIN_LED_1:
+    name: PA0
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PA0
+    mode: Digital output
+    user_label: PIN_LED_1
+    configuration:
+      pad_initial_level: High
+  PK7:
+    name: PK7
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PK7
+    mode: Analog
+    user_label: PK7
+    configuration: null
+  PK6:
+    name: PK6
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PK6
+    mode: Analog
+    user_label: PK6
+    configuration: null
+  PK5:
+    name: PK5
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PK5
+    mode: Analog
+    user_label: PK5
+    configuration: null
+  PK4:
+    name: PK4
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PK4
+    mode: Analog
+    user_label: PK4
+    configuration: null
+  PK3:
+    name: PK3
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PK3
+    mode: Analog
+    user_label: PK3
+    configuration: null
+  PK2:
+    name: PK2
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PK2
+    mode: Analog
+    user_label: PK2
+    configuration: null
+  PK1:
+    name: PK1
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PK1
+    mode: Analog
+    user_label: PK1
+    configuration: null
+  PK0:
+    name: PK0
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PK0
+    mode: Analog
+    user_label: PK0
+    configuration: null
+toolchain_options: []
