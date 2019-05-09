@@ -3,7 +3,12 @@
 
 #define MIN_BOOL_OFFSET 100
 #define MIN_ERROR_OFFSET 25
+
 #define INTEGRAL_OFFSET 100 
+
+#define BASE_SPEED 100
+#define MAX_SPEED  200
+#define MIN_SPEED 2
 
 #define KP 0.1 
 #define KD 0.1
@@ -123,39 +128,60 @@ void get_pid(){
 	oper_pwm = (KP*error)+(Ki*integral)+(KD*derivate); 
 }
 
+void set_pwm(){
+	int32_t oper_pwm_1 = BASE_SPEED + oper_pwm;
+	int32_t oper_pwm_2 = BASE_SPEED - oper_pwm;
+	
+	if (oper_pwm_1 > MAX_SPEED){
+		oper_pwm_1 = MAX_SPEED; 
+	}
+	if (oper_pwm_2 > MAX_SPEED){
+		oper_pwm_2 = MAX_SPEED;
+	}
+	if (oper_pwm_1 < MIN_SPEED){
+		oper_pwm_1 = 0;
+	}
+	if (oper_pwm_1 < MIN_SPEED){
+		oper_pwm_1 = 0;
+	}
+	pwm_1 = oper_pwm_1; 
+	pwm_2 = oper_pwm_2; 
+}
 /*PWM 1*/
 ISR(TIMER0_COMPA_vect)
 {
 	static uint_fast16_t counter;
 	
-	if (counter == 1) {
-		PIN_PWM_1_set_level(false);
+	if (counter == 0) {
+		PIN_PWM_1_set_level(true);
 	}
 	if (counter == pwm_1){
-		PIN_PWM_1_set_level(true); 
+		PIN_PWM_1_set_level(false); 
 	}
 	if(counter == 500){
 		counter = 0; 
 	}
-	
+	else{
 	counter++;
+	}
 }
 /*PWM 2*/
 ISR(TIMER2_COMPA_vect)
 {
 	static uint_fast16_t counter;
 	
-	if (counter == 1) {
-		PIN_PWM_1_set_level(false);
+	if (counter == 0) {
+		PIN_PWM_1_set_level(true);
 	}
 	if (counter == pwm_2){
-		PIN_PWM_1_set_level(true); 
+		PIN_PWM_1_set_level(false); 
 	}
 	if(counter == 500){
 		counter = 0; 
 	}
-	
+	else{
 	counter++;
+	}
 }
 
 ISR(TIMER1_COMPA_vect)
@@ -164,7 +190,7 @@ ISR(TIMER1_COMPA_vect)
 	get_line_pos();
 	get_error();
 	get_pid(); 
-				
+	set_pwm(); 			
 }
 int main(void)
 {
