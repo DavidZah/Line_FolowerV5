@@ -46,9 +46,8 @@
 
 #include <adc_basic.h>
 
-#include <tc8.h>
-
-#include <tc8.h>
+#include <interrupt_avr8.h>
+#include <pwm_basic.h>
 
 #include <tc16.h>
 

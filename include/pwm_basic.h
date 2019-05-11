@@ -1,7 +1,8 @@
 /**
  * \file
  *
- * \brief TC8 related functionality declaration.
+ * \brief PWM Normal mode (i.e. non-split) declaration.
+ *
  (c) 2018 Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms,you may use this software and
@@ -21,10 +22,11 @@
     FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
     ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
     THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
+ *
  */
 
-#ifndef TC8_H_INCLUDED
-#define TC8_H_INCLUDED
+#ifndef PWM_BASIC_H_INCLUDED
+#define PWM_BASIC_H_INCLUDED
 
 #include <compiler.h>
 
@@ -32,12 +34,35 @@
 extern "C" {
 #endif
 
-int8_t TIMER_2_init();
+typedef void (*pwm_irq_cb_t)(void);
 
-int8_t TIMER_1_init();
+#define PWM_0_INTERRUPT_CB_RATE 0
+
+/** The datatype matching the bitwidth of the PWM hardware */
+typedef uint8_t PWM_0_register_t;
+
+int8_t PWM_0_init(void);
+
+void PWM_0_enable();
+
+void PWM_0_disable();
+
+void PWM_0_enable_output_ch0();
+
+void PWM_0_disable_output_ch0();
+
+void PWM_0_enable_output_ch1();
+
+void PWM_0_disable_output_ch1();
+
+void PWM_0_load_counter(PWM_0_register_t counter_value);
+
+void PWM_0_load_duty_cycle_ch0(PWM_0_register_t duty_value);
+
+void PWM_0_load_duty_cycle_ch1(PWM_0_register_t duty_value);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* TC8_H_INCLUDED */
+#endif /* PWM_BASIC_H_INCLUDED */

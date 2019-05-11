@@ -64,7 +64,6 @@ int8_t ADC_0_init()
 	         | (0x05 << ADPS0); /* 32 */
 	ADCSRB = (0x00 << ADTS0)    /* Free Running mode */
 	         | (0 << ACME)      /* Analog Comparator Multiplexer: disabled */
-			 | 0x08             /*Secon reading*/
 	    ;
 
 	DIDR2 = 1 << ADC8D     /* Disable digital input buffer for ADC8 */

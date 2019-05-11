@@ -25,16 +25,6 @@
 
 // </h>
 
-// <h> TC2 Clock Settings
-// <y> TC2 Clock source
-// <CLKio"> CLKio
-// <CLKasy"> CLKasy
-// <i> This defines the clock source for the TC2 module
-// <id> tc2_clock_source
-#define CONF_TC2_SRC CLKio
-
-// </h>
-
 // <h> TC1 Clock Settings
 // <y> TC1 Clock source
 // <CLKio"> CLKio

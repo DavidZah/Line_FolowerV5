@@ -51,23 +51,27 @@
         <file category="other" condition="ARMCC, GCC, IAR" name="doxygen/generator/DoxygenLayout.xml"/>
         <file category="other" condition="ARMCC, GCC, IAR" name="doxygen/adc.dox"/>
         <file category="other" condition="ARMCC, GCC, IAR" name="doxygen/adc_basic.dox"/>
+        <file category="other" condition="ARMCC, GCC, IAR" name="doxygen/pwm.dox"/>
+        <file category="other" condition="ARMCC, GCC, IAR" name="doxygen/pwm_basic.dox"/>
         <file category="other" condition="ARMCC, GCC, IAR" name="doxygen/system.dox"/>
         <file category="other" condition="ARMCC, GCC, IAR" name="doxygen/timer.dox"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="examples/include/adc_basic_example.h"/>
+        <file category="header" condition="ARMCC, GCC, IAR" name="examples/include/pwm_basic_example.h"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="examples/src/adc_basic_example.c"/>
+        <file category="source" condition="ARMCC, GCC, IAR" name="examples/src/pwm_basic_example.c"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="include/adc_basic.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="include/exint.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="include/port.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="include/protected_io.h"/>
+        <file category="header" condition="ARMCC, GCC, IAR" name="include/pwm_basic.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="include/sysctrl.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="include/system.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="include/tc16.h"/>
-        <file category="header" condition="ARMCC, GCC, IAR" name="include/tc8.h"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="src/adc_basic.c"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="src/exint.c"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="src/protected_io.S"/>
+        <file category="source" condition="ARMCC, GCC, IAR" name="src/pwm_basic.c"/>
         <file category="source" condition="ARMCC, GCC, IAR" name="src/tc16.c"/>
-        <file category="source" condition="ARMCC, GCC, IAR" name="src/tc8.c"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="utils/assembler.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="utils/assembler/gas.h"/>
         <file category="header" condition="ARMCC, GCC, IAR" name="utils/assembler/iar.h"/>

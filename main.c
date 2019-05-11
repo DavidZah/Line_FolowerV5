@@ -2,17 +2,17 @@
 #include <avr/delay.h>
 
 #define MIN_BOOL_OFFSET 100
-#define MIN_ERROR_OFFSET 25
+#define MIN_ERROR_OFFSET 20
 
 #define INTEGRAL_OFFSET 100 
 
-#define BASE_SPEED 100
-#define MAX_SPEED  200
-#define MIN_SPEED 2
+#define BASE_SPEED 150
+#define MAX_SPEED  400
+#define MIN_SPEED 0
 
-#define KP 0.1 
-#define KD 0.1
-#define Ki 0.1
+#define KP 1
+#define KD 0
+#define Ki 0
 
 uint16_t adc_buffer[8];
 uint16_t sense_min_val[8];
@@ -23,8 +23,8 @@ int32_t error = 0;
  
 int32_t oper_pwm = 0 ; 
 
-int16_t pwm_1 = 499; 
-int16_t pwm_2 = 1; 
+int16_t pwm_1 = 0; 
+int16_t pwm_2 = 0; 
 
 bool sense_line[8]; 
 

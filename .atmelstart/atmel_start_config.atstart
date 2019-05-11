@@ -7,7 +7,7 @@ versions:
   content: 1.0.1498
   content_pack_name: acme-packs-all
   format: '2'
-  frontend: 1.5.1826
+  frontend: 1.5.1877
 board:
   identifier: CustomBoard
   device: ATmega2560-16AU
@@ -59,7 +59,7 @@ drivers:
     functionality: External_IRQ
     api: Drivers:EXINT:Init
     configuration:
-      exint_isc0: The low level of ISC0 generates an interrupt request
+      exint_isc0: The falling edge of ISC0 generates an interrupt request
       exint_isc1: The low level of ISC1 generates an interrupt request
       exint_isc2: The low level of ISC2 generates an interrupt request
       exint_isc3: The low level of ISC3 generates an interrupt request
@@ -69,13 +69,13 @@ drivers:
       exint_isc7: The low level of ISC7 generates an interrupt request
       inc_isr_harness: true
     optional_signals:
-    - identifier: EXTERNAL_IRQ_0:PCINT/7
-      pad: PB7
+    - identifier: EXTERNAL_IRQ_0:INT/0
+      pad: PD0
       mode: Enabled
       configuration: null
-      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::EXINT.PCINT.7
-      name: EXINT/PCINT/7
-      label: PCINT/7
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::EXINT.INT.0
+      name: EXINT/INT/0
+      label: INT/0
     variant: null
     clocks:
       domain_group: null
@@ -161,25 +161,38 @@ drivers:
           external_frequency: 0
         configuration:
           adc_clock_source: CLKadc
-  TIMER_2:
-    user_label: TIMER_2
-    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC0::driver_config_definition::TC8.Mode.0.Normal::Drivers:TC8:Init
-    functionality: Timer
-    api: Drivers:TC8:Init
+  PWM_0:
+    user_label: PWM_0
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC0::driver_config_definition::TC8.Mode.1.Phase.Correct::Drivers:PWM:Basic
+    functionality: PWM
+    api: Drivers:PWM:Basic
     configuration:
-      inc_isr_harness: true
-      tc8_coma: Normal port operation, OCA disconnected
-      tc8_comb: Normal port operation, OCB disconnected
-      tc8_cs: IO clock divided by 1024
-      tc8_ociea: true
+      callback_rate: 0
+      inc_overflow_irq: false
+      pwm_top: '0xff'
+      tc8_coma: Clear OCA on up-counting, set OCA on down-counting
+      tc8_comb: Clear OCB on up-counting, set OCB on down-counting
+      tc8_cs: No prescaling
+      tc8_ociea: false
       tc8_ocieb: false
-      tc8_orca: 170
-      tc8_orcb: 0
-      tc8_psrasy: false
-      tc8_psrsync: false
-      tc8_toie: true
-      tc8_tsm: false
-    optional_signals: []
+      tc8_ocra: 170
+      tc8_ocrb: 170
+      tc8_toie: false
+    optional_signals:
+    - identifier: PWM_0:OCA
+      pad: PB7
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::TC0.OCA
+      name: TC0/OCA
+      label: OCA
+    - identifier: PWM_0:OCB
+      pad: PG5
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::TC0.OCB
+      name: TC0/OCB
+      label: OCB
     variant: null
     clocks:
       domain_group:
@@ -190,36 +203,6 @@ drivers:
           external_frequency: 0
         configuration:
           tc8_clock_source: CLKio
-  TIMER_1:
-    user_label: TIMER_1
-    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC2::driver_config_definition::TC8.Mode.0.Normal::Drivers:TC8:Init
-    functionality: Timer
-    api: Drivers:TC8:Init
-    configuration:
-      inc_isr_harness: true
-      tc8_async_exclk: false
-      tc8_coma: Normal port operation, OCA disconnected
-      tc8_comb: Normal port operation, OCB disconnected
-      tc8_cs: IO clock divided by 1024
-      tc8_ociea: true
-      tc8_ocieb: false
-      tc8_orca: 170
-      tc8_orcb: 0
-      tc8_psrasy: false
-      tc8_psrsync: false
-      tc8_toie: true
-      tc8_tsm: false
-    optional_signals: []
-    variant: null
-    clocks:
-      domain_group:
-        nodes:
-        - name: TC2
-          input: CLKio
-          external: false
-          external_frequency: 0
-        configuration:
-          tc2_clock_source: CLKio
   TIMER_0:
     user_label: TIMER_0
     definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC1::driver_config_definition::TC16.Mode.12.CTC::Drivers:TC16:Init
@@ -233,7 +216,7 @@ drivers:
       tc16_ices: Falling edge will trigger input capture
       tc16_icie: false
       tc16_icnc: false
-      tc16_icr: 255
+      tc16_icr: 171
       tc16_ociea: true
       tc16_ocieb: false
       tc16_orca: 170
@@ -254,6 +237,24 @@ drivers:
         configuration:
           tc16_clock_source: CLKio
 pads:
+  PG5:
+    name: PG5
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PG5
+    mode: Digital output
+    user_label: PG5
+    configuration: null
+  PIN_MOTOR_B_1:
+    name: PE3
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PE3
+    mode: Digital output
+    user_label: PIN_MOTOR_B_1
+    configuration: null
+  PIN_MOTOR_B_2:
+    name: PE4
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PE4
+    mode: Digital output
+    user_label: PIN_MOTOR_B_2
+    configuration: null
   PIN_PWM_1:
     name: PH4
     definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PH4
@@ -267,11 +268,29 @@ pads:
     user_label: PIN_PWM_2
     configuration:
       pad_initial_level: Low
+  PIN_MOTOR_A_1:
+    name: PB5
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PB5
+    mode: Digital output
+    user_label: PIN_MOTOR_A_1
+    configuration: null
+  PIN_MOTOR_2:
+    name: PB6
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PB6
+    mode: Digital output
+    user_label: PIN_MOTOR_2
+    configuration: null
   PB7:
     name: PB7
     definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PB7
-    mode: Digital input
+    mode: Digital output
     user_label: PB7
+    configuration: null
+  PD0:
+    name: PD0
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PD0
+    mode: Digital input
+    user_label: PD0
     configuration: null
   PIN_LED_3:
     name: PA2
