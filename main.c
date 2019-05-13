@@ -4,14 +4,16 @@
 #define MIN_BOOL_OFFSET 100
 #define MIN_ERROR_OFFSET 20
 
+#define PWM_COUNTER 250
+
 #define INTEGRAL_OFFSET 100 
 
-#define BASE_SPEED 150
-#define MAX_SPEED  400
+#define BASE_SPEED 251
+#define MAX_SPEED  250
 #define MIN_SPEED 0
 
-#define KP 1
-#define KD 0
+#define KP 0.8
+#define KD 0.2
 #define Ki 0
 
 uint16_t adc_buffer[8];
@@ -26,6 +28,7 @@ int32_t oper_pwm = 0 ;
 int16_t pwm_1 = 0; 
 int16_t pwm_2 = 0; 
 
+uint8_t start = 2; 
 bool sense_line[8]; 
 
 
@@ -89,6 +92,13 @@ void get_line_pos(){
 				sense_line[y] = false; 
 			}	
 		}
+	if (sense_line[0]&&sense_line[1]&&sense_line[2]&&sense_line[3]&&sense_line[4]&&sense_line[5]&&sense_line[6]&&sense_line[7]){
+	//		start--;  
+		}
+	if (start == 0){
+		PIN_PWM_1_set_level(false);
+		PIN_PWM_2_set_level(false);
+	}
 }
 
 void get_error(){
@@ -105,10 +115,16 @@ void get_error(){
 			}		
 			}
 	
-	
-	error = 4* sense[0]+3*sense[1]+2*sense[2]+sense[3]-sense[4]-2*sense[5]-3*sense[6]-4*sense[7];
-	
-	
+		
+	int32_t num = (-400 * (sense[0] - sense[7])) + (-300 * (sense[1] - sense[6])) + (-200 * (sense[2] - sense[5]))+(-100 * (sense[3] - sense[4]));
+
+	int32_t denom = sense[0] + sense[1] + sense[2] + sense[3] + sense[4] + sense[5]+sense[6]+sense[7];
+	if (denom != 0){
+	error = num / denom;
+	}
+	else{
+		error = 0; 
+	}
 }
 
 void get_pid(){
@@ -129,8 +145,28 @@ void get_pid(){
 }
 
 void set_pwm(){
-	int32_t oper_pwm_1 = BASE_SPEED + oper_pwm;
-	int32_t oper_pwm_2 = BASE_SPEED - oper_pwm;
+	int32_t oper_pwm_1 = BASE_SPEED - oper_pwm;
+	int32_t oper_pwm_2 = BASE_SPEED + oper_pwm;
+	
+	
+	if (oper_pwm_1 > 0){
+		PIN_MOTOR_A_1_set_level(true);
+		PIN_MOTOR_A_2_set_level(false);
+	}
+	else{
+		PIN_MOTOR_A_1_set_level(false);
+		PIN_MOTOR_A_2_set_level(true);
+		oper_pwm_1 = oper_pwm_1 * -1; 
+	}
+	if (oper_pwm_2 > 0){
+		PIN_MOTOR_B_1_set_level(true);
+		PIN_MOTOR_B_2_set_level(false);
+	}
+	else{
+		PIN_MOTOR_B_1_set_level(false);
+		PIN_MOTOR_B_2_set_level(true);
+		oper_pwm_2 = oper_pwm_2 * -1; 
+	}
 	
 	if (oper_pwm_1 > MAX_SPEED){
 		oper_pwm_1 = MAX_SPEED; 
@@ -147,11 +183,14 @@ void set_pwm(){
 	pwm_1 = oper_pwm_1; 
 	pwm_2 = oper_pwm_2; 
 }
+
+
 /*PWM 1*/
 ISR(TIMER0_COMPA_vect)
-{
+{ 
 	static uint_fast16_t counter;
-	
+	if (start !=0)
+	{
 	if (counter == 0) {
 		PIN_PWM_1_set_level(true);
 		PIN_PWM_2_set_level(true);
@@ -163,21 +202,27 @@ ISR(TIMER0_COMPA_vect)
 	if (counter == pwm_2){
 		PIN_PWM_2_set_level(false); 
 	}
-	if(counter == 500){
+	if(counter == PWM_COUNTER){
 		counter = 0; 
 	}
 	else{
 	counter++;
 	}
+	}
 }
 ISR(TIMER1_COMPA_vect)
 {
+	if (start !=0)
+	{
 	adc_sync_read_sensor();
 	get_line_pos();
 	get_error();
 	get_pid(); 
-	set_pwm(); 			
+	set_pwm();
+	}
 }
+
+
 int main(void)
 {
 	/* Initializes MCU, drivers and middleware */
@@ -187,8 +232,8 @@ int main(void)
 		
 	OCR0A =0xaa;
 	
-	OCR1A = 1000; // 1ms
-	
+	OCR1A = 500; // 1ms
+
 	/* Replace with your application code */
 	while (1) {
 	}

@@ -197,20 +197,20 @@ static inline bool PIN_LED_3_get_level()
 }
 
 /**
- * \brief Set PIN_MOTOR_A_1 pull mode
+ * \brief Set PIN_MOTOR_B_1 pull mode
  *
  * Configure pin to pull up, down or disable pull mode, supported pull
  * modes are defined by device used
  *
  * \param[in] pull_mode Pin pull mode
  */
-static inline void PIN_MOTOR_A_1_set_pull_mode(const enum port_pull_mode pull_mode)
+static inline void PIN_MOTOR_B_1_set_pull_mode(const enum port_pull_mode pull_mode)
 {
 	PORTB_set_pin_pull_mode(5, pull_mode);
 }
 
 /**
- * \brief Set PIN_MOTOR_A_1 data direction
+ * \brief Set PIN_MOTOR_B_1 data direction
  *
  * Select if the pin data direction is input, output or disabled.
  * If disabled state is not possible, this function throws an assert.
@@ -220,59 +220,59 @@ static inline void PIN_MOTOR_A_1_set_pull_mode(const enum port_pull_mode pull_mo
  *                      PORT_DIR_OFF = Disables the pin
  *                      (low power state)
  */
-static inline void PIN_MOTOR_A_1_set_dir(const enum port_dir dir)
+static inline void PIN_MOTOR_B_1_set_dir(const enum port_dir dir)
 {
 	PORTB_set_pin_dir(5, dir);
 }
 
 /**
- * \brief Set PIN_MOTOR_A_1 level
+ * \brief Set PIN_MOTOR_B_1 level
  *
  * Sets output level on a pin
  *
  * \param[in] level true  = Pin level set to "high" state
  *                  false = Pin level set to "low" state
  */
-static inline void PIN_MOTOR_A_1_set_level(const bool level)
+static inline void PIN_MOTOR_B_1_set_level(const bool level)
 {
 	PORTB_set_pin_level(5, level);
 }
 
 /**
- * \brief Toggle output level on PIN_MOTOR_A_1
+ * \brief Toggle output level on PIN_MOTOR_B_1
  *
  * Toggle the pin level
  */
-static inline void PIN_MOTOR_A_1_toggle_level()
+static inline void PIN_MOTOR_B_1_toggle_level()
 {
 	PORTB_toggle_pin_level(5);
 }
 
 /**
- * \brief Get level on PIN_MOTOR_A_1
+ * \brief Get level on PIN_MOTOR_B_1
  *
  * Reads the level on a pin
  */
-static inline bool PIN_MOTOR_A_1_get_level()
+static inline bool PIN_MOTOR_B_1_get_level()
 {
 	return PORTB_get_pin_level(5);
 }
 
 /**
- * \brief Set PIN_MOTOR_2 pull mode
+ * \brief Set PIN_MOTOR_B_2 pull mode
  *
  * Configure pin to pull up, down or disable pull mode, supported pull
  * modes are defined by device used
  *
  * \param[in] pull_mode Pin pull mode
  */
-static inline void PIN_MOTOR_2_set_pull_mode(const enum port_pull_mode pull_mode)
+static inline void PIN_MOTOR_B_2_set_pull_mode(const enum port_pull_mode pull_mode)
 {
 	PORTB_set_pin_pull_mode(6, pull_mode);
 }
 
 /**
- * \brief Set PIN_MOTOR_2 data direction
+ * \brief Set PIN_MOTOR_B_2 data direction
  *
  * Select if the pin data direction is input, output or disabled.
  * If disabled state is not possible, this function throws an assert.
@@ -282,40 +282,40 @@ static inline void PIN_MOTOR_2_set_pull_mode(const enum port_pull_mode pull_mode
  *                      PORT_DIR_OFF = Disables the pin
  *                      (low power state)
  */
-static inline void PIN_MOTOR_2_set_dir(const enum port_dir dir)
+static inline void PIN_MOTOR_B_2_set_dir(const enum port_dir dir)
 {
 	PORTB_set_pin_dir(6, dir);
 }
 
 /**
- * \brief Set PIN_MOTOR_2 level
+ * \brief Set PIN_MOTOR_B_2 level
  *
  * Sets output level on a pin
  *
  * \param[in] level true  = Pin level set to "high" state
  *                  false = Pin level set to "low" state
  */
-static inline void PIN_MOTOR_2_set_level(const bool level)
+static inline void PIN_MOTOR_B_2_set_level(const bool level)
 {
 	PORTB_set_pin_level(6, level);
 }
 
 /**
- * \brief Toggle output level on PIN_MOTOR_2
+ * \brief Toggle output level on PIN_MOTOR_B_2
  *
  * Toggle the pin level
  */
-static inline void PIN_MOTOR_2_toggle_level()
+static inline void PIN_MOTOR_B_2_toggle_level()
 {
 	PORTB_toggle_pin_level(6);
 }
 
 /**
- * \brief Get level on PIN_MOTOR_2
+ * \brief Get level on PIN_MOTOR_B_2
  *
  * Reads the level on a pin
  */
-static inline bool PIN_MOTOR_2_get_level()
+static inline bool PIN_MOTOR_B_2_get_level()
 {
 	return PORTB_get_pin_level(6);
 }
@@ -383,144 +383,20 @@ static inline bool PB7_get_level()
 }
 
 /**
- * \brief Set PD0 pull mode
+ * \brief Set PIN_MOTOR_A_1 pull mode
  *
  * Configure pin to pull up, down or disable pull mode, supported pull
  * modes are defined by device used
  *
  * \param[in] pull_mode Pin pull mode
  */
-static inline void PD0_set_pull_mode(const enum port_pull_mode pull_mode)
-{
-	PORTD_set_pin_pull_mode(0, pull_mode);
-}
-
-/**
- * \brief Set PD0 data direction
- *
- * Select if the pin data direction is input, output or disabled.
- * If disabled state is not possible, this function throws an assert.
- *
- * \param[in] direction PORT_DIR_IN  = Data direction in
- *                      PORT_DIR_OUT = Data direction out
- *                      PORT_DIR_OFF = Disables the pin
- *                      (low power state)
- */
-static inline void PD0_set_dir(const enum port_dir dir)
-{
-	PORTD_set_pin_dir(0, dir);
-}
-
-/**
- * \brief Set PD0 level
- *
- * Sets output level on a pin
- *
- * \param[in] level true  = Pin level set to "high" state
- *                  false = Pin level set to "low" state
- */
-static inline void PD0_set_level(const bool level)
-{
-	PORTD_set_pin_level(0, level);
-}
-
-/**
- * \brief Toggle output level on PD0
- *
- * Toggle the pin level
- */
-static inline void PD0_toggle_level()
-{
-	PORTD_toggle_pin_level(0);
-}
-
-/**
- * \brief Get level on PD0
- *
- * Reads the level on a pin
- */
-static inline bool PD0_get_level()
-{
-	return PORTD_get_pin_level(0);
-}
-
-/**
- * \brief Set PIN_MOTOR_B_1 pull mode
- *
- * Configure pin to pull up, down or disable pull mode, supported pull
- * modes are defined by device used
- *
- * \param[in] pull_mode Pin pull mode
- */
-static inline void PIN_MOTOR_B_1_set_pull_mode(const enum port_pull_mode pull_mode)
-{
-	PORTE_set_pin_pull_mode(3, pull_mode);
-}
-
-/**
- * \brief Set PIN_MOTOR_B_1 data direction
- *
- * Select if the pin data direction is input, output or disabled.
- * If disabled state is not possible, this function throws an assert.
- *
- * \param[in] direction PORT_DIR_IN  = Data direction in
- *                      PORT_DIR_OUT = Data direction out
- *                      PORT_DIR_OFF = Disables the pin
- *                      (low power state)
- */
-static inline void PIN_MOTOR_B_1_set_dir(const enum port_dir dir)
-{
-	PORTE_set_pin_dir(3, dir);
-}
-
-/**
- * \brief Set PIN_MOTOR_B_1 level
- *
- * Sets output level on a pin
- *
- * \param[in] level true  = Pin level set to "high" state
- *                  false = Pin level set to "low" state
- */
-static inline void PIN_MOTOR_B_1_set_level(const bool level)
-{
-	PORTE_set_pin_level(3, level);
-}
-
-/**
- * \brief Toggle output level on PIN_MOTOR_B_1
- *
- * Toggle the pin level
- */
-static inline void PIN_MOTOR_B_1_toggle_level()
-{
-	PORTE_toggle_pin_level(3);
-}
-
-/**
- * \brief Get level on PIN_MOTOR_B_1
- *
- * Reads the level on a pin
- */
-static inline bool PIN_MOTOR_B_1_get_level()
-{
-	return PORTE_get_pin_level(3);
-}
-
-/**
- * \brief Set PIN_MOTOR_B_2 pull mode
- *
- * Configure pin to pull up, down or disable pull mode, supported pull
- * modes are defined by device used
- *
- * \param[in] pull_mode Pin pull mode
- */
-static inline void PIN_MOTOR_B_2_set_pull_mode(const enum port_pull_mode pull_mode)
+static inline void PIN_MOTOR_A_1_set_pull_mode(const enum port_pull_mode pull_mode)
 {
 	PORTE_set_pin_pull_mode(4, pull_mode);
 }
 
 /**
- * \brief Set PIN_MOTOR_B_2 data direction
+ * \brief Set PIN_MOTOR_A_1 data direction
  *
  * Select if the pin data direction is input, output or disabled.
  * If disabled state is not possible, this function throws an assert.
@@ -530,59 +406,59 @@ static inline void PIN_MOTOR_B_2_set_pull_mode(const enum port_pull_mode pull_mo
  *                      PORT_DIR_OFF = Disables the pin
  *                      (low power state)
  */
-static inline void PIN_MOTOR_B_2_set_dir(const enum port_dir dir)
+static inline void PIN_MOTOR_A_1_set_dir(const enum port_dir dir)
 {
 	PORTE_set_pin_dir(4, dir);
 }
 
 /**
- * \brief Set PIN_MOTOR_B_2 level
+ * \brief Set PIN_MOTOR_A_1 level
  *
  * Sets output level on a pin
  *
  * \param[in] level true  = Pin level set to "high" state
  *                  false = Pin level set to "low" state
  */
-static inline void PIN_MOTOR_B_2_set_level(const bool level)
+static inline void PIN_MOTOR_A_1_set_level(const bool level)
 {
 	PORTE_set_pin_level(4, level);
 }
 
 /**
- * \brief Toggle output level on PIN_MOTOR_B_2
+ * \brief Toggle output level on PIN_MOTOR_A_1
  *
  * Toggle the pin level
  */
-static inline void PIN_MOTOR_B_2_toggle_level()
+static inline void PIN_MOTOR_A_1_toggle_level()
 {
 	PORTE_toggle_pin_level(4);
 }
 
 /**
- * \brief Get level on PIN_MOTOR_B_2
+ * \brief Get level on PIN_MOTOR_A_1
  *
  * Reads the level on a pin
  */
-static inline bool PIN_MOTOR_B_2_get_level()
+static inline bool PIN_MOTOR_A_1_get_level()
 {
 	return PORTE_get_pin_level(4);
 }
 
 /**
- * \brief Set PG5 pull mode
+ * \brief Set PIN_MOTOR_A_2 pull mode
  *
  * Configure pin to pull up, down or disable pull mode, supported pull
  * modes are defined by device used
  *
  * \param[in] pull_mode Pin pull mode
  */
-static inline void PG5_set_pull_mode(const enum port_pull_mode pull_mode)
+static inline void PIN_MOTOR_A_2_set_pull_mode(const enum port_pull_mode pull_mode)
 {
-	PORTG_set_pin_pull_mode(5, pull_mode);
+	PORTE_set_pin_pull_mode(3, pull_mode);
 }
 
 /**
- * \brief Set PG5 data direction
+ * \brief Set PIN_MOTOR_A_2 data direction
  *
  * Select if the pin data direction is input, output or disabled.
  * If disabled state is not possible, this function throws an assert.
@@ -592,42 +468,42 @@ static inline void PG5_set_pull_mode(const enum port_pull_mode pull_mode)
  *                      PORT_DIR_OFF = Disables the pin
  *                      (low power state)
  */
-static inline void PG5_set_dir(const enum port_dir dir)
+static inline void PIN_MOTOR_A_2_set_dir(const enum port_dir dir)
 {
-	PORTG_set_pin_dir(5, dir);
+	PORTE_set_pin_dir(3, dir);
 }
 
 /**
- * \brief Set PG5 level
+ * \brief Set PIN_MOTOR_A_2 level
  *
  * Sets output level on a pin
  *
  * \param[in] level true  = Pin level set to "high" state
  *                  false = Pin level set to "low" state
  */
-static inline void PG5_set_level(const bool level)
+static inline void PIN_MOTOR_A_2_set_level(const bool level)
 {
-	PORTG_set_pin_level(5, level);
+	PORTE_set_pin_level(3, level);
 }
 
 /**
- * \brief Toggle output level on PG5
+ * \brief Toggle output level on PIN_MOTOR_A_2
  *
  * Toggle the pin level
  */
-static inline void PG5_toggle_level()
+static inline void PIN_MOTOR_A_2_toggle_level()
 {
-	PORTG_toggle_pin_level(5);
+	PORTE_toggle_pin_level(3);
 }
 
 /**
- * \brief Get level on PG5
+ * \brief Get level on PIN_MOTOR_A_2
  *
  * Reads the level on a pin
  */
-static inline bool PG5_get_level()
+static inline bool PIN_MOTOR_A_2_get_level()
 {
-	return PORTG_get_pin_level(5);
+	return PORTE_get_pin_level(3);
 }
 
 /**

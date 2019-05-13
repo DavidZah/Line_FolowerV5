@@ -1,8 +1,7 @@
 /**
  * \file
  *
- * \brief PWM Basic driver example.
- *
+ * \brief TC8 related functionality implementation.
  (c) 2018 Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms,you may use this software and
@@ -22,28 +21,44 @@
     FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
     ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
     THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
- *
  */
 
-#include <atmel_start.h>
-#include <pwm_basic_example.h>
-#include <pwm_basic.h>
-#include <atomic.h>
+/**
+ * \addtogroup doc_driver_tc8
+ *
+ * \section doc_driver_tc8_rev Revision History
+ * - v0.0.0.1 Initial Commit
+ *
+ *@{
+ */
+#include <tc8.h>
+#include <utils.h>
 
-volatile uint16_t         PWM_0_isr_executed_counter = 0;
-volatile PWM_0_register_t PWM_0_duty;
-
-uint8_t PWM_0_test_pwm_basic(void)
+/**
+ * \brief Initialize TIMER_2 interface
+ *
+ * \return Initialization status.
+ */
+int8_t TIMER_2_init()
 {
 
-	// Enable pin output
-	PWM_0_enable_output_ch0();
+	/* Enable TC0 */
+	PRR0 &= ~(1 << PRTIM0);
 
-	// Set channel 0 duty cycle value register value to specified value
-	PWM_0_load_duty_cycle_ch0(0x3f);
+	// TCCR0A = (0 << COM0A1) | (0 << COM0A0) /* Normal port operation, OCA disconnected */
+	//		 | (0 << COM0B1) | (0 << COM0B0) /* Normal port operation, OCB disconnected */
+	//		 | (0 << WGM01) | (0 << WGM00); /* TC8 Mode 0 Normal */
 
-	// Set counter register value
-	PWM_0_load_counter(0);
+	TCCR0B = 0                                          /* TC8 Mode 0 Normal */
+	         | (0 << CS02) | (0 << CS01) | (1 << CS00); /* IO clock divided by 1024 */
 
-	return 1;
+	TIMSK0 = 0 << OCIE0B   /* Output Compare B Match Interrupt Enable: disabled */
+	         | 1 << OCIE0A /* Output Compare A Match Interrupt Enable: enabled */
+	         | 0 << TOIE0; /* Overflow Interrupt Enable: enabled */
+
+	// GTCCR = 0 << TSM /* Timer/Counter Synchronization Mode: disabled */
+	//		 | 0 << PSRASY /* Prescaler Reset Timer/Counter2: disabled */
+	//		 | 0 << PSRSYNC; /* Prescaler Reset: disabled */
+
+	return 0;
 }

@@ -8,8 +8,6 @@ driver_isr.c
 
 examples\src\adc_basic_example.c
 
-examples\src\pwm_basic_example.c
-
 main.c
 
 src\adc_basic.c
@@ -20,7 +18,7 @@ src\exint.c
 
 src\protected_io.S
 
-src\pwm_basic.c
-
 src\tc16.c
+
+src\tc8.c
 

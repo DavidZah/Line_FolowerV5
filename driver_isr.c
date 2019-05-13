@@ -36,9 +36,9 @@
 #include <driver_init.h>
 #include <compiler.h>
 
-ISR(INT0_vect)
+ISR(PCINT0_vect)
 {
 
-	/* Insert your EXINT/INT/0 interrupt handling code here */
+	/* Insert your pin change 0 interrupt handling code here */
 }
 

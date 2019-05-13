@@ -20,7 +20,7 @@ driver_isr.d driver_isr.o: .././driver_isr.c ../include/driver_init.h \
  ../Config/clock_config.h ../include/port.h ../include/atmel_start_pins.h \
  ../include/sysctrl.h ../utils/atomic.h ../include/protected_io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sleep.h \
- ../include/exint.h ../include/adc_basic.h ../include/pwm_basic.h \
+ ../include/exint.h ../include/adc_basic.h ../include/tc8.h \
  ../include/tc16.h
 
 ../include/driver_init.h:
@@ -79,6 +79,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../include/adc_basic.h:
 
-../include/pwm_basic.h:
+../include/tc8.h:
 
 ../include/tc16.h:
