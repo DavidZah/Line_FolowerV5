@@ -8,13 +8,13 @@
 
 #define INTEGRAL_OFFSET 100 
 
-#define BASE_SPEED_LEFT   75
-#define BASE_SPEED_RIGHT  75
-#define MAX_SPEED  250
+#define BASE_SPEED_LEFT   250
+#define BASE_SPEED_RIGHT  250
+#define MAX_SPEED  254
 #define MIN_SPEED 0
 
-#define KP 0.8
-#define KD 0.2
+#define KP 0.9
+#define KD 0
 #define Ki 0
 
 uint16_t adc_buffer[8];
@@ -180,8 +180,8 @@ void set_pwm(){
 	if (oper_pwm_2 < MIN_SPEED){
 		oper_pwm_2 = 0;
 	}
-	OCR0A = oper_pwm_1; 
-	OCR0B = oper_pwm_2; 
+	OCR0B = oper_pwm_1; 
+	OCR0A = oper_pwm_2; 
 }
 
 ISR(TIMER1_COMPA_vect)
