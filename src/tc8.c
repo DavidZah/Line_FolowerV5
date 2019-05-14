@@ -52,8 +52,8 @@ int8_t TIMER_2_init()
 	TCCR0B = 0                                          /* TC8 Mode 3 Fast PWM */
 	         | (0 << CS02) | (1 << CS01) | (0 << CS00); /* IO clock divided by 256 */
 
-	TIMSK0 = 1 << OCIE0B   /* Output Compare B Match Interrupt Enable: enabled */
-	         | 1 << OCIE0A /* Output Compare A Match Interrupt Enable: enabled */
+	TIMSK0 = 0 << OCIE0B   /* Output Compare B Match Interrupt Enable: enabled */
+	         | 0 << OCIE0A /* Output Compare A Match Interrupt Enable: enabled */
 	         | 0 << TOIE0; /* Overflow Interrupt Enable: disabled */
 
 	// GTCCR = 0 << TSM /* Timer/Counter Synchronization Mode: disabled */

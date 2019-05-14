@@ -14,13 +14,13 @@
 
 #define INTEGRAL_OFFSET 100 
 
-#define BASE_SPEED_LEFT   220
-#define BASE_SPEED_RIGHT  220
+#define BASE_SPEED_LEFT   240
+#define BASE_SPEED_RIGHT  240
 #define MAX_SPEED  255
 #define MIN_SPEED 0
 
-#define KP 1.3
-#define KD 0.2
+#define KP 1
+#define KD 0
 #define Ki 0
 
 uint16_t adc_buffer[8];
@@ -36,9 +36,10 @@ int16_t pwm_1 = 0;
 int16_t pwm_2 = 0; 
 
 uint8_t start = 2; 
+
 bool sense_line[8]; 
-
-
+bool last_pos_left = false; 
+bool last_pos_right = false;
 void adc_sync_read_sensor(){
 	adc_buffer [7] = ADC_0_get_conversion(0);
 	adc_buffer [0] = ADC_0_get_conversion(1);
@@ -99,6 +100,17 @@ void get_line_pos(){
 				sense_line[y] = false; 
 			}	
 		}
+	if (!sense_line[0]&&!sense_line[1]&&!sense_line[2]&&!sense_line[3]&&!sense_line[4]&&!sense_line[5]&&!sense_line[6]&&sense_line[7]){
+		last_pos_left = true;
+	}
+	if (sense_line[0]&&!sense_line[1]&&!sense_line[2]&&!sense_line[3]&&!sense_line[4]&&!sense_line[5]&&!sense_line[6]&&!sense_line[7]){
+		last_pos_right = true;
+	}
+	if (sense_line[1]||sense_line[2]||sense_line[3]||sense_line[4]||sense_line[5]||sense_line[6]){
+			last_pos_left = false;
+			last_pos_right = false; 
+	}
+	
 	if (sense_line[0]&&sense_line[1]&&sense_line[2]&&sense_line[3]&&sense_line[4]&&sense_line[5]&&sense_line[6]&&sense_line[7]){
 	//		start--;  
 		}
@@ -122,7 +134,7 @@ void get_error(){
 			}
 	
 		
-	int32_t num = (-400 * (sense[0] - sense[7])) + (-300 * (sense[1] - sense[6])) + (-200 * (sense[2] - sense[5]))+(-100 * (sense[3] - sense[4]));
+	int32_t num = (-510 * (sense[0] - sense[7])) + (-350 * (sense[1] - sense[6])) + (-100 * (sense[2] - sense[5]))+(-30 * (sense[3] - sense[4]));
 
 	int32_t denom = sense[0] + sense[1] + sense[2] + sense[3] + sense[4] + sense[5] + sense[6] + sense[7];
 	if (denom != 0){
@@ -154,6 +166,14 @@ void set_pwm(){
 	int32_t oper_pwm_1 = BASE_SPEED_RIGHT - oper_pwm;
 	int32_t oper_pwm_2 = BASE_SPEED_LEFT + oper_pwm;
 	
+	if (last_pos_left){
+		oper_pwm_1 = -200; 
+		oper_pwm_2 = 250;
+	}
+	if (last_pos_right){
+		oper_pwm_1 = 250;
+		oper_pwm_2 = -200;
+	}
 	
 	if (oper_pwm_1 > 0){
 		PIN_MOTOR_A_1_set_level(true);
