@@ -36,9 +36,21 @@
 #include <driver_init.h>
 #include <compiler.h>
 
-ISR(PCINT0_vect)
+ISR(INT4_vect)
 {
 
-	/* Insert your pin change 0 interrupt handling code here */
+	/* Insert your EXINT/INT/4 interrupt handling code here */
+}
+
+ISR(TIMER0_COMPB_vect)
+{
+
+	/* Insert your TIMER_2 compare channel B interrupt handling code here */
+}
+
+ISR(TIMER0_COMPA_vect)
+{
+
+	/* Insert your TIMER_2 compare channel A interrupt handling code here */
 }
 

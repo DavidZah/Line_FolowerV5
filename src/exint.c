@@ -41,9 +41,9 @@
 int8_t EXTERNAL_IRQ_0_init()
 {
 
-	PCICR = (1 << PCIE0); // Enable pin change interrupt 0
+	EICRB = (1 << ISC41) | (0 << ISC40); // The falling edge of ISC4 generates an interrupt request
 
-	PCMSK0 = (1 << PCINT7); // Pin change enable mask 7
+	EIMSK = (1 << INT4); // Enable external interrupt request 4
 
 	return 0;
 }

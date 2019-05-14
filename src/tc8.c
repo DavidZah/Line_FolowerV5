@@ -45,16 +45,16 @@ int8_t TIMER_2_init()
 	/* Enable TC0 */
 	PRR0 &= ~(1 << PRTIM0);
 
-	// TCCR0A = (0 << COM0A1) | (0 << COM0A0) /* Normal port operation, OCA disconnected */
-	//		 | (0 << COM0B1) | (0 << COM0B0) /* Normal port operation, OCB disconnected */
-	//		 | (0 << WGM01) | (0 << WGM00); /* TC8 Mode 0 Normal */
+	TCCR0A = (1 << COM0A1) | (0 << COM0A0)   /* Clear OCA on Compare Match, set OCA on BOTTOM (non-inverting mode) */
+	         | (1 << COM0B1) | (0 << COM0B0) /* Clear OCB on Compare Match, set OCB on BOTTOM (non-inverting mode) */
+	         | (1 << WGM01) | (1 << WGM00);  /* TC8 Mode 3 Fast PWM */
 
-	TCCR0B = 0                                          /* TC8 Mode 0 Normal */
-	         | (0 << CS02) | (0 << CS01) | (1 << CS00); /* IO clock divided by 1024 */
+	TCCR0B = 0                                          /* TC8 Mode 3 Fast PWM */
+	         | (1 << CS02) | (0 << CS01) | (0 << CS00); /* IO clock divided by 256 */
 
-	TIMSK0 = 0 << OCIE0B   /* Output Compare B Match Interrupt Enable: disabled */
+	TIMSK0 = 1 << OCIE0B   /* Output Compare B Match Interrupt Enable: enabled */
 	         | 1 << OCIE0A /* Output Compare A Match Interrupt Enable: enabled */
-	         | 0 << TOIE0; /* Overflow Interrupt Enable: enabled */
+	         | 0 << TOIE0; /* Overflow Interrupt Enable: disabled */
 
 	// GTCCR = 0 << TSM /* Timer/Counter Synchronization Mode: disabled */
 	//		 | 0 << PSRASY /* Prescaler Reset Timer/Counter2: disabled */

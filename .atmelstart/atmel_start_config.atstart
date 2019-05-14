@@ -63,19 +63,19 @@ drivers:
       exint_isc1: The low level of ISC1 generates an interrupt request
       exint_isc2: The low level of ISC2 generates an interrupt request
       exint_isc3: The low level of ISC3 generates an interrupt request
-      exint_isc4: The low level of ISC4 generates an interrupt request
+      exint_isc4: The falling edge of ISC4 generates an interrupt request
       exint_isc5: The low level of ISC5 generates an interrupt request
       exint_isc6: The low level of ISC6 generates an interrupt request
       exint_isc7: The low level of ISC7 generates an interrupt request
       inc_isr_harness: true
     optional_signals:
-    - identifier: EXTERNAL_IRQ_0:PCINT/7
-      pad: PB7
+    - identifier: EXTERNAL_IRQ_0:INT/4
+      pad: PE4
       mode: Enabled
       configuration: null
-      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::EXINT.PCINT.7
-      name: EXINT/PCINT/7
-      label: PCINT/7
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::EXINT.INT.4
+      name: EXINT/INT/4
+      label: INT/4
     variant: null
     clocks:
       domain_group: null
@@ -163,23 +163,37 @@ drivers:
           adc_clock_source: CLKadc
   TIMER_2:
     user_label: TIMER_2
-    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC0::driver_config_definition::TC8.Mode.0.Normal::Drivers:TC8:Init
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::TC0::driver_config_definition::TC8.Mode.3.Fast.PWM::Drivers:TC8:Init
     functionality: Timer
     api: Drivers:TC8:Init
     configuration:
       inc_isr_harness: true
-      tc8_coma: Normal port operation, OCA disconnected
-      tc8_comb: Normal port operation, OCB disconnected
-      tc8_cs: IO clock divided by 1024
+      tc8_coma: Clear OCA on Compare Match, set OCA on BOTTOM (non-inverting mode)
+      tc8_comb: Clear OCB on Compare Match, set OCB on BOTTOM (non-inverting mode)
+      tc8_cs: IO clock divided by 256
       tc8_ociea: true
-      tc8_ocieb: false
+      tc8_ocieb: true
       tc8_orca: 170
-      tc8_orcb: 0
+      tc8_orcb: 170
       tc8_psrasy: false
       tc8_psrsync: false
-      tc8_toie: true
+      tc8_toie: false
       tc8_tsm: false
-    optional_signals: []
+    optional_signals:
+    - identifier: TIMER_2:OCA
+      pad: PB7
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::TC0.OCA
+      name: TC0/OCA
+      label: OCA
+    - identifier: TIMER_2:OCB
+      pad: PG5
+      mode: Enabled
+      configuration: null
+      definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::optional_signal_definition::TC0.OCB
+      name: TC0/OCB
+      label: OCB
     variant: null
     clocks:
       domain_group:
@@ -224,31 +238,30 @@ drivers:
         configuration:
           tc16_clock_source: CLKio
 pads:
-  PIN_MOTOR_A_1:
+  PG5:
+    name: PG5
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PG5
+    mode: Digital output
+    user_label: PG5
+    configuration: null
+  PE4:
     name: PE4
     definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PE4
+    mode: Digital input
+    user_label: PE4
+    configuration: null
+  PIN_MOTOR_A_1:
+    name: PH5
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PH5
     mode: Digital output
     user_label: PIN_MOTOR_A_1
     configuration: null
   PIN_MOTOR_A_2:
-    name: PE5
-    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PE5
+    name: PH6
+    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PH6
     mode: Digital output
     user_label: PIN_MOTOR_A_2
     configuration: null
-  PIN_PWM_1:
-    name: PH4
-    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PH4
-    mode: Digital output
-    user_label: PIN_PWM_1
-    configuration: null
-  PIN_PWM_2:
-    name: PH5
-    definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PH5
-    mode: Digital output
-    user_label: PIN_PWM_2
-    configuration:
-      pad_initial_level: Low
   PIN_MOTOR_B_1:
     name: PB5
     definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PB5
@@ -264,7 +277,7 @@ pads:
   PB7:
     name: PB7
     definition: Atmel:ATMega640_1280_2560_drivers:1.0.0::ATmega2560-16AU::pad::PB7
-    mode: Digital input
+    mode: Digital output
     user_label: PB7
     configuration: null
   PIN_LED_3:

@@ -8,7 +8,8 @@
 
 #define INTEGRAL_OFFSET 100 
 
-#define BASE_SPEED 251
+#define BASE_SPEED_LEFT   75
+#define BASE_SPEED_RIGHT  75
 #define MAX_SPEED  250
 #define MIN_SPEED 0
 
@@ -96,8 +97,7 @@ void get_line_pos(){
 	//		start--;  
 		}
 	if (start == 0){
-		PIN_PWM_1_set_level(false);
-		PIN_PWM_2_set_level(false);
+
 	}
 }
 
@@ -145,8 +145,8 @@ void get_pid(){
 }
 
 void set_pwm(){
-	int32_t oper_pwm_1 = BASE_SPEED - oper_pwm;
-	int32_t oper_pwm_2 = BASE_SPEED + oper_pwm;
+	int32_t oper_pwm_1 = BASE_SPEED_RIGHT - oper_pwm;
+	int32_t oper_pwm_2 = BASE_SPEED_LEFT + oper_pwm;
 	
 	
 	if (oper_pwm_1 > 0){
@@ -180,36 +180,10 @@ void set_pwm(){
 	if (oper_pwm_2 < MIN_SPEED){
 		oper_pwm_2 = 0;
 	}
-	pwm_1 = oper_pwm_1; 
-	pwm_2 = oper_pwm_2; 
+	OCR0A = oper_pwm_1; 
+	OCR0B = oper_pwm_2; 
 }
 
-
-/*PWM 1*/
-ISR(TIMER0_COMPA_vect)
-{ 
-	static uint_fast16_t counter;
-	if (start !=0)
-	{
-	if (counter == 0) {
-		PIN_PWM_1_set_level(true);
-		PIN_PWM_2_set_level(true);
-
-	}
-	if (counter == pwm_1){
-		PIN_PWM_1_set_level(false); 
-	}
-	if (counter == pwm_2){
-		PIN_PWM_2_set_level(false); 
-	}
-	if(counter == PWM_COUNTER){
-		counter = 0; 
-	}
-	else{
-	counter++;
-	}
-	}
-}
 ISR(TIMER1_COMPA_vect)
 {
 	if (start !=0)
@@ -229,11 +203,21 @@ int main(void)
 	atmel_start_init();
 	sense_calibration();
 	ENABLE_INTERRUPTS();
-		
-	OCR0A =0xaa;
 	
-	OCR1A = 500; // 1ms
-
+	PIN_MOTOR_A_1_set_level(true);
+	PIN_MOTOR_A_2_set_level(false);
+		
+	PIN_MOTOR_B_1_set_level(true);
+	PIN_MOTOR_B_2_set_level(false);
+			
+	OCR0A = 25;
+	OCR0B = 25;
+	
+	
+	
+ 	OCR1A = 500; // 1ms
+	
+	
 	/* Replace with your application code */
 	while (1) {
 	}

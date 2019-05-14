@@ -39,7 +39,7 @@
  *
  * \acme_license_stop
  *
- * Project: line_V7
+ * Project: line_V8
  * Target:  ATmega2560 
  *
  **/

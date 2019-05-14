@@ -40,9 +40,9 @@ void EXTERNAL_IRQ_0_initialization(void)
 {
 
 	// Set pin direction to input
-	PB7_set_dir(PORT_DIR_IN);
+	PE4_set_dir(PORT_DIR_IN);
 
-	PB7_set_pull_mode(
+	PE4_set_pull_mode(
 	    // <y> Pull configuration
 	    // <id> pad_pull_config
 	    // <PORT_PULL_OFF"> Off
@@ -85,6 +85,26 @@ void ADC_0_initialization(void)
 
 void TIMER_2_initialization(void)
 {
+
+	// Set pin direction to output
+	PB7_set_dir(PORT_DIR_OUT);
+
+	PB7_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
+
+	// Set pin direction to output
+	PG5_set_dir(PORT_DIR_OUT);
+
+	PG5_set_level(
+	    // <y> Initial level
+	    // <id> pad_initial_level
+	    // <false"> Low
+	    // <true"> High
+	    false);
 
 	TIMER_2_init();
 }
@@ -162,7 +182,7 @@ void system_init()
 	    // <true"> High
 	    false);
 
-	/* PORT setting on PE4 */
+	/* PORT setting on PH5 */
 
 	// Set pin direction to output
 	PIN_MOTOR_A_1_set_dir(PORT_DIR_OUT);
@@ -174,36 +194,12 @@ void system_init()
 	    // <true"> High
 	    false);
 
-	/* PORT setting on PE5 */
+	/* PORT setting on PH6 */
 
 	// Set pin direction to output
 	PIN_MOTOR_A_2_set_dir(PORT_DIR_OUT);
 
 	PIN_MOTOR_A_2_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	/* PORT setting on PH4 */
-
-	// Set pin direction to output
-	PIN_PWM_1_set_dir(PORT_DIR_OUT);
-
-	PIN_PWM_1_set_level(
-	    // <y> Initial level
-	    // <id> pad_initial_level
-	    // <false"> Low
-	    // <true"> High
-	    false);
-
-	/* PORT setting on PH5 */
-
-	// Set pin direction to output
-	PIN_PWM_2_set_dir(PORT_DIR_OUT);
-
-	PIN_PWM_2_set_level(
 	    // <y> Initial level
 	    // <id> pad_initial_level
 	    // <false"> Low

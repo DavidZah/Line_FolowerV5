@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>line_V7</AssemblyName>
-    <Name>line_V7</Name>
-    <RootNamespace>line_V7</RootNamespace>
+    <AssemblyName>line_V8</AssemblyName>
+    <Name>line_V8</Name>
+    <RootNamespace>line_V8</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -51,10 +51,10 @@
         </TopLevelComponents>
         <AcmeActionInfos>
           <AcmeProjectActionInfo Action="File" Source="main.c" IsConfig="false" Hash="k0AH7j+BrmdFhBPzCCMptA" />
-          <AcmeProjectActionInfo Action="File" Source="src/driver_init.c" IsConfig="false" Hash="OQ3zTXDHFQhnRr7XmhSO+A" />
+          <AcmeProjectActionInfo Action="File" Source="src/driver_init.c" IsConfig="false" Hash="XlrV0qxmJmn89F1IEFIe+g" />
           <AcmeProjectActionInfo Action="File" Source="include/driver_init.h" IsConfig="false" Hash="B4nuQJYnR+cpwNOPSa7VNw" />
-          <AcmeProjectActionInfo Action="File" Source="include/atmel_start_pins.h" IsConfig="false" Hash="vQmvUMNImoOYC5tzJn8Ifg" />
-          <AcmeProjectActionInfo Action="File" Source="driver_isr.c" IsConfig="false" Hash="E8j5h85kv6Otn//VuR+bAg" />
+          <AcmeProjectActionInfo Action="File" Source="include/atmel_start_pins.h" IsConfig="false" Hash="FsUmQzqQk/rMgy+B+M6OMw" />
+          <AcmeProjectActionInfo Action="File" Source="driver_isr.c" IsConfig="false" Hash="zdwgr1UD1iM0fYIzVWhQXw" />
           <AcmeProjectActionInfo Action="File" Source="examples/include/adc_basic_example.h" IsConfig="false" Hash="b4YpSTgweb/uQMln8ckLhw" />
           <AcmeProjectActionInfo Action="File" Source="examples/src/adc_basic_example.c" IsConfig="false" Hash="HSNM/2JYOv3OVbIZ1qPkxw" />
           <AcmeProjectActionInfo Action="File" Source="include/adc_basic.h" IsConfig="false" Hash="vqkvokwBf/Kv84ErgrFTbw" />
@@ -66,10 +66,10 @@
           <AcmeProjectActionInfo Action="File" Source="include/tc16.h" IsConfig="false" Hash="kvy+Ok0TPvjOsPSQ5jPgPQ" />
           <AcmeProjectActionInfo Action="File" Source="include/tc8.h" IsConfig="false" Hash="3g3OteGRwNeIqjmpJlNkSw" />
           <AcmeProjectActionInfo Action="File" Source="src/adc_basic.c" IsConfig="false" Hash="JhtyV/l1lZ0YPCgOMAS6iw" />
-          <AcmeProjectActionInfo Action="File" Source="src/exint.c" IsConfig="false" Hash="YP/ZzwhwsZ92qHGUMoh7fQ" />
+          <AcmeProjectActionInfo Action="File" Source="src/exint.c" IsConfig="false" Hash="4DvcS/0QcjOHNIdU00UidQ" />
           <AcmeProjectActionInfo Action="File" Source="src/protected_io.S" IsConfig="false" Hash="xMwVxkDny+gUjOkARvQSWA" />
           <AcmeProjectActionInfo Action="File" Source="src/tc16.c" IsConfig="false" Hash="69UBJwlryNTBEkI3aEC5hQ" />
-          <AcmeProjectActionInfo Action="File" Source="src/tc8.c" IsConfig="false" Hash="c6vQlz2obxb3ngigM3xLCw" />
+          <AcmeProjectActionInfo Action="File" Source="src/tc8.c" IsConfig="false" Hash="EqehuJgWAWJtnVxPNe8SYw" />
           <AcmeProjectActionInfo Action="File" Source="utils/assembler.h" IsConfig="false" Hash="jaaWqpCXnRJMciuXpjSfgQ" />
           <AcmeProjectActionInfo Action="File" Source="utils/assembler/gas.h" IsConfig="false" Hash="wV+34zXWOOJ7jfwQibBgLQ" />
           <AcmeProjectActionInfo Action="File" Source="utils/assembler/iar.h" IsConfig="false" Hash="re7qP3QC0FK72z2UZ4UoFg" />
@@ -181,6 +181,7 @@
       <Value>%24(PackRepoDir)\Atmel\ATmega_DFP\1.3.300\include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
   <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
   <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
   <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
