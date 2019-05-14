@@ -54,9 +54,9 @@ int8_t TIMER_0_init()
 	         | 0 << ICES1                               /* Input Capture Edge Select: disabled */
 	         | (0 << CS12) | (1 << CS11) | (0 << CS10); /* IO clock divided by 8 */
 
-	ICR1 = 5000; /* Top counter value: 0xff */
+	ICR1 = 511; /* Top counter value: 0xff */
 
-	OCR1A = 0xaa; /* Output compare A: 0xaa */
+	OCR1A = 0x01; /* Output compare A: 0xaa */
 
 	// OCR1B = 0x0; /* Output compare B: 0x0 */
 

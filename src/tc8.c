@@ -50,7 +50,7 @@ int8_t TIMER_2_init()
 	         | (1 << WGM01) | (1 << WGM00);  /* TC8 Mode 3 Fast PWM */
 
 	TCCR0B = 0                                          /* TC8 Mode 3 Fast PWM */
-	         | (1 << CS02) | (0 << CS01) | (0 << CS00); /* IO clock divided by 256 */
+	         | (0 << CS02) | (1 << CS01) | (0 << CS00); /* IO clock divided by 256 */
 
 	TIMSK0 = 1 << OCIE0B   /* Output Compare B Match Interrupt Enable: enabled */
 	         | 1 << OCIE0A /* Output Compare A Match Interrupt Enable: enabled */

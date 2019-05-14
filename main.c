@@ -1,3 +1,9 @@
+/*Createt by David Žahour 
+ *PID regulation for line folower and analog inputs on fot ATmega2560
+ *
+*/
+
+
 #include <atmel_start.h>
 #include <avr/delay.h>
 
@@ -8,13 +14,13 @@
 
 #define INTEGRAL_OFFSET 100 
 
-#define BASE_SPEED_LEFT   250
-#define BASE_SPEED_RIGHT  250
-#define MAX_SPEED  254
+#define BASE_SPEED_LEFT   220
+#define BASE_SPEED_RIGHT  220
+#define MAX_SPEED  255
 #define MIN_SPEED 0
 
-#define KP 0.9
-#define KD 0
+#define KP 1.3
+#define KD 0.2
 #define Ki 0
 
 uint16_t adc_buffer[8];
@@ -118,7 +124,7 @@ void get_error(){
 		
 	int32_t num = (-400 * (sense[0] - sense[7])) + (-300 * (sense[1] - sense[6])) + (-200 * (sense[2] - sense[5]))+(-100 * (sense[3] - sense[4]));
 
-	int32_t denom = sense[0] + sense[1] + sense[2] + sense[3] + sense[4] + sense[5]+sense[6]+sense[7];
+	int32_t denom = sense[0] + sense[1] + sense[2] + sense[3] + sense[4] + sense[5] + sense[6] + sense[7];
 	if (denom != 0){
 	error = num / denom;
 	}
@@ -186,12 +192,18 @@ void set_pwm(){
 
 ISR(TIMER1_COMPA_vect)
 {
+	/*Reguluation circle*/
 	if (start !=0)
 	{
+	/**/
 	adc_sync_read_sensor();
+	/*Transfare line to bool*/
 	get_line_pos();
+	/*Calculate error*/
 	get_error();
+	/*Calculate PID */
 	get_pid(); 
+	/*Set PID reagulation on motors*/
 	set_pwm();
 	}
 }
@@ -202,22 +214,11 @@ int main(void)
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();
 	sense_calibration();
+	
+	/*Ready for start up*/
 	ENABLE_INTERRUPTS();
 	
-	PIN_MOTOR_A_1_set_level(true);
-	PIN_MOTOR_A_2_set_level(false);
-		
-	PIN_MOTOR_B_1_set_level(true);
-	PIN_MOTOR_B_2_set_level(false);
 			
-	OCR0A = 25;
-	OCR0B = 25;
-	
-	
-	
- 	OCR1A = 500; // 1ms
-	
-	
 	/* Replace with your application code */
 	while (1) {
 	}
