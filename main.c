@@ -1,6 +1,6 @@
 /*Createt by David Žahour 
  *PID regulation for line folower and analog inputs on fot ATmega2560
- *
+ * 15.5.2019 on SOUEPL
 */
 
 
@@ -118,7 +118,7 @@ void get_stop_on_line(){
 	}
 	if (on_start_line == !last_on_line){
 		start--; 
-		_delay_ms(50); 
+		_delay_ms(100); 
 	}
 	last_on_line = on_start_line; 	
 	if (start == 0){
@@ -272,6 +272,10 @@ int main(void)
 		{
 			OCR0A = 0;
 			OCR0B = 0;
+			PIN_MOTOR_A_1_set_level(false);
+			PIN_MOTOR_A_2_set_level(false);
+			PIN_MOTOR_B_1_set_level(false);
+			PIN_MOTOR_B_2_set_level(false);
 		}
 	}
 }
