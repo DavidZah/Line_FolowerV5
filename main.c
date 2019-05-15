@@ -1,6 +1,6 @@
 /*Createt by David Žahour 
  *PID regulation for line folower and analog inputs on fot ATmega2560
- * 15.5.2019 on SOUEPL
+ * 15.5.2019 on SOUEPL for robotic competition 
 */
 
 
