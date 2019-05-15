@@ -14,8 +14,8 @@
 
 #define INTEGRAL_OFFSET 100 
 
-#define BASE_SPEED_LEFT   240
-#define BASE_SPEED_RIGHT  240
+#define BASE_SPEED_LEFT   254
+#define BASE_SPEED_RIGHT  254
 #define MAX_SPEED  255
 #define MIN_SPEED 0
 
@@ -35,11 +35,15 @@ int32_t oper_pwm = 0 ;
 int16_t pwm_1 = 0; 
 int16_t pwm_2 = 0; 
 
-uint8_t start = 2; 
+uint8_t start = 4; 
 
-bool sense_line[8]; 
+bool sense_line[8];
+ 
 bool last_pos_left = false; 
 bool last_pos_right = false;
+
+bool on_start_line = false; 
+
 void adc_sync_read_sensor(){
 	adc_buffer [7] = ADC_0_get_conversion(0);
 	adc_buffer [0] = ADC_0_get_conversion(1);
@@ -100,6 +104,32 @@ void get_line_pos(){
 				sense_line[y] = false; 
 			}	
 		}
+}
+
+void get_stop_on_line(){
+	
+	static last_on_line; 
+	
+	if (sense_line[0]&&sense_line[1]&&sense_line[2]&&sense_line[3]&&sense_line[4]&&sense_line[5]&&sense_line[6]&&sense_line[7]){
+		on_start_line = true; 
+	}
+	else{
+		on_start_line = false; 
+	}
+	if (on_start_line == !last_on_line){
+		start--; 
+		_delay_ms(50); 
+	}
+	last_on_line = on_start_line; 	
+	if (start == 0){
+		OCR0A = 0; 
+		OCR0B = 0; 
+	}
+	
+}
+
+void get_last_line_pos(){
+	/*Out of line part*/
 	if (!sense_line[0]&&!sense_line[1]&&!sense_line[2]&&!sense_line[3]&&!sense_line[4]&&!sense_line[5]&&!sense_line[6]&&sense_line[7]){
 		last_pos_left = true;
 	}
@@ -107,15 +137,8 @@ void get_line_pos(){
 		last_pos_right = true;
 	}
 	if (sense_line[1]||sense_line[2]||sense_line[3]||sense_line[4]||sense_line[5]||sense_line[6]){
-			last_pos_left = false;
-			last_pos_right = false; 
-	}
-	
-	if (sense_line[0]&&sense_line[1]&&sense_line[2]&&sense_line[3]&&sense_line[4]&&sense_line[5]&&sense_line[6]&&sense_line[7]){
-	//		start--;  
-		}
-	if (start == 0){
-
+		last_pos_left = false;
+		last_pos_right = false;
 	}
 }
 
@@ -134,7 +157,7 @@ void get_error(){
 			}
 	
 		
-	int32_t num = (-510 * (sense[0] - sense[7])) + (-350 * (sense[1] - sense[6])) + (-100 * (sense[2] - sense[5]))+(-30 * (sense[3] - sense[4]));
+	int32_t num = (-510 * (sense[0] - sense[7])) + (-350 * (sense[1] - sense[6])) + (-85 * (sense[2] - sense[5]))+(-15 * (sense[3] - sense[4]));
 
 	int32_t denom = sense[0] + sense[1] + sense[2] + sense[3] + sense[4] + sense[5] + sense[6] + sense[7];
 	if (denom != 0){
@@ -219,6 +242,10 @@ ISR(TIMER1_COMPA_vect)
 	adc_sync_read_sensor();
 	/*Transfare line to bool*/
 	get_line_pos();
+	/*Get out of line position*/
+	get_last_line_pos();
+	/*Check for start line to stop*/
+	get_stop_on_line(); 
 	/*Calculate error*/
 	get_error();
 	/*Calculate PID */
@@ -241,5 +268,10 @@ int main(void)
 			
 	/* Replace with your application code */
 	while (1) {
+		if (start==0)
+		{
+			OCR0A = 0;
+			OCR0B = 0;
+		}
 	}
 }
